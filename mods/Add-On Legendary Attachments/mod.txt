@@ -3,7 +3,7 @@
 	"description": "Adds a standalone copy of legendary attachments for legendary skins that you own. Can be used even if you don't have the legendary skin equipped.",
 	"author": "github.com/ncakes",
 	"contact": "github.com/ncakes/PD2-Add-On-Legendary-Attachments",
-	"version": "1.0",
+	"version": "1.1",
 	"priority": 0,
 	"blt_version": 2,
 	"hooks": [
