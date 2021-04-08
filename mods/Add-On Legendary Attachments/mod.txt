@@ -3,7 +3,7 @@
 	"description": "Adds a standalone copy of legendary attachments for legendary skins that you own. Can be used even if you don't have the legendary skin equipped.",
 	"author": "github.com/ncakes",
 	"contact": "github.com/ncakes/PD2-Add-On-Legendary-Attachments",
-	"version": "1.1",
+	"version": "1.2",
 	"priority": 0,
 	"blt_version": 2,
 	"hooks": [
@@ -38,7 +38,7 @@
 		{
 			"identifier": "AddOnLegendaryAttachmentsAssets",
 			"install_dir": "assets/mod_overrides/",
-			"install_folder": "Add-On Legendary Attachments Assets",
+			"install_folder": "AOLA Assets",
 			"display_name": "Assets",
 			"host": {
 				"meta": "https://github.com/ncakes/PD2-Add-On-Legendary-Attachments/releases/latest/download/meta.json"

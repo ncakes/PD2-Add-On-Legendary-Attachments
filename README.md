@@ -45,10 +45,10 @@ C:\Program Files (x86)\Steam\steamapps\common\PAYDAY 2\assets\mod_overrides
 
 Before uninstalling, you should remove all add-on legendary parts from your weapons. If you delete the assets folder, the BLT mod will automatically remove the attachments the next time you launch the game. Step by step instructions:
 
-1. Delete the `Add-On Legendary Attachments Assets` folder found here:
+1. Delete the `AOLA Assets` folder found here:
 
 ```
-C:\Program Files (x86)\Steam\steamapps\common\PAYDAY 2\assets\mod_overrides\Add-On Legendary Attachments Assets
+C:\Program Files (x86)\Steam\steamapps\common\PAYDAY 2\assets\mod_overrides\AOLA Assets
 ```
 
 2. Launch the game and the attachments will be removed. Ignore the pop-up asking to download assets.
