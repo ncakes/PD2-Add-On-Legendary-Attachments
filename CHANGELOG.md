@@ -1,5 +1,17 @@
 # Changelog
 
+## v1.3
+
+*2021-04-08 - Update 205*
+
+- Changed some based-on parts to reduce detection risk sync issues:
+	- Admiral Barrel now synced as default barrel.
+	- Astatoz Barrel now synced as default barrel.
+	- Astatoz Foregrip now synced as default foregrip.
+	- Mars Ultor Stock now synced as Folding Stock.
+	- The Gimp Body Kit now synced as I'll Take Half That Kit.
+- Updated localizations for suppressed legendary attachment mods.
+
 ## v1.2
 
 *2021-04-08 - Update 205*

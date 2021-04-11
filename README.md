@@ -8,6 +8,31 @@ It is recommended to also use [Super Duper Skin Swapper](https://github.com/ncak
 
 Peers will see a vanilla game attachment. Typically, this is either a default part or a base game (non-DLC) attachment. There are a few exceptions where a DLC attachment is used, but only if it belongs to the same DLC as the weapon. A full list can be found [here](https://github.com/ncakes/PD2-Add-On-Legendary-Attachments/blob/master/Based-On%20Parts.md).
 
+## IMPORTANT: Client Detection Risk
+
+Due to the fact that add-on legendary attachments are synced as different parts, your concealment (and thus detection risk) will be incorrectly calculated by the host if the add-on part does not have the same concealment as the synced part. This can be a problem when stealthing as a client because detection is calculated by the host. For loud, it doesn't matter because crit chance is handled locally.
+
+As of v1.3, some based-on attachments have been changed to mitigate this problem as much as possible. However, the following add-on attachments will still DECREASE your concealment and give you HIGHER detection risk when playing as a client:
+
+- Don Pastrami Stock: other players see your concealment DECREASED by 1 point, i.e. HIGHER detection risk (bad).
+- Mars Ultor Barrel: other players see your concealment DECREASED by 4 points, i.e. HIGHER detection risk (bad).
+	- Note: when combined with the Mars Ultor Stock, your concealment is effectively only DECREASED by 1 point which cancels out most of the negative effects.
+- Santa's Slayers Laser: other players see your concealment DECREASED by 2 points, i.e. HIGHER detection risk (bad).
+- The Gimp Barrel: other players see your concealment DECREASED by 3 points, i.e. HIGHER detection risk (bad).
+	- Note: when combined with The Gimp Body Kit, the concealment effects cancel out and the host sees the correct concealment.
+- Vlad's Rodina Laser: other players see your concealment DECREASED by 1 point, i.e. HIGHER detection risk (bad).
+	- Note: when combined with the Vlad's Rodina Stock, your concealment is effectively INCREASED by 1 point which actually benefits you.
+
+The following add-on attachments will still INCREASE your concealment and give you LOWER detection risk when playing as a client:
+
+- Astatoz Stock: other players will see your concealment INCREASED by 6 points, i.e. LOWER detection risk (good).
+- Big Kahuna Stock: other players will see your concealment INCREASED by 3 points, i.e. LOWER detection risk (good).
+- Mars Ultor Stock: other players will see your concealment INCREASED by 3 points, i.e. LOWER detection risk (good).
+- Midas Touch Barrel: other players will see your concealment INCREASED by 10 points, i.e. LOWER detection risk (good).
+- Plush Phoenix Stock: other players will see your concealment INCREASED by 2 points, i.e. LOWER detection risk (good).
+- The Gimp Body Kit: other players will see your concealment INCREASED by 3 points, i.e. LOWER detection risk (good).
+- Vlad's Rodina Stock: other players will see your concealment INCREASED by 2 points, i.e. LOWER detection risk (good).
+
 ## Known Issues
 
 The Vlad's Rodina Laser and Santa's Slayers Laser can be seen by other players. However, the integrated laser found on non-gadget legendary attachments cannot be seen by other players. Full list of attachments with lasers that do not sync:
