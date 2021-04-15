@@ -33,6 +33,10 @@ The following add-on attachments will still INCREASE your concealment and give y
 - The Gimp Body Kit: other players will see your concealment INCREASED by 3 points, i.e. LOWER detection risk (good).
 - Vlad's Rodina Stock: other players will see your concealment INCREASED by 2 points, i.e. LOWER detection risk (good).
 
+## Don Pastrami Suppressor Glitch Fix
+
+When equipping the Beak Suppressor with the Don Pastrami Barrel in the base game, the suppressor model becomes invisible and only appears intermittently when you inspect your weapon. In AOLA v1.4, an edited Beak Suppressor model has been added and is automatically used when the Don Pastrami Barrel (real or add-on) is equipped. The edited model is visually identical to the Beak Suppressor; only the culling object was changed to prevent it from glitching. Shoutout to Hoppip and Mercu for helping me figure out how to get the model working.
+
 ## Known Issues
 
 The Vlad's Rodina Laser and Santa's Slayers Laser can be seen by other players. However, the integrated laser found on non-gadget legendary attachments cannot be seen by other players. Full list of attachments with lasers that do not sync:

@@ -1,5 +1,11 @@
 # Changelog
 
+## v1.4
+
+*2021-04-15 - Update 205*
+
+- Added an edited Beak Suppressor model that is automatically enabled when using the Don Pastrami Barrel to fix the invisible suppressor glitch.
+
 ## v1.3
 
 *2021-04-08 - Update 205*
