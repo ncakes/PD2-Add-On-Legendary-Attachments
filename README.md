@@ -48,8 +48,6 @@ The Vlad's Rodina Laser and Santa's Slayers Laser can be seen by other players. 
 - Mars Ultor Barrel
 - Plush Phoenix Barrel
 
-May add the option to hide unowned add-on attachments in the future.
-
 Add-on legendary attachments use a white version of the legendary skin icon. I have no plans to change the icons at this time, mainly because OSA/SDSS use a colored version of the legendary skin icon and this is a nice way to differentiate the add-on attachments while preserving the style. Also because I really can't be bothered to make 40 icons.
 
 ## Installation

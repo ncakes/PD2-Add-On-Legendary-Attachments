@@ -1,5 +1,15 @@
 # Changelog
 
+## v1.5
+
+*2021-04-21 - Update 205*
+
+- Edited the ADS viewmodel when using the add-on Santa's Slayers Laser on the single Crosskill to prevent vision from being obscured.
+- Add-on Santa's Slayers Laser now blocks all sight attachments except for the Marksman Sight to prevent clipping.
+- Added an option for hiding unowned legendary attachments.
+- Added an option for disabling the Beak Suppressor fix.
+- Added an option for disabling the Crosskill viewmodel change.
+
 ## v1.4
 
 *2021-04-15 - Update 205*
