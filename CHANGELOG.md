@@ -1,5 +1,28 @@
 # Changelog
 
+## v2.0
+
+*2026-09-11 - Update 247.3*
+
+- Converted mod to BeardLib. A manual update to v2.0 is required, see README.md for instructions. Future updates will be available through the BeardLib Mods Manager.
+- Fixed iron sights on the Midas Touch barrel (thanks MilesFox92).
+- Updated Santa's Slayers attachments to use the single-hand weapon icon.
+- Santa's Slayers Laser blocks all sights except for the Marksman Sight.
+- Santa's Slayers Laser equipped on the single Crosskill uses the new base-game ADS viewmodel.
+	- Option available to use the legacy AOLA viewmodel.
+- Restored the ability to use any barrel extension on the Demon Barrel (removed from the base game in U242.1).
+- Don Pastrami suppressor fix is now always enabled.
+- Legendary attachment fixes from Optional Skin Attachments are now natively available in AOLA.
+	- AOLA is still compatible with OSA, but these fixes will now be available even if OSA is not installed.
+- M308 now shows mini-icons for the upper body and lower body (renamed to upper receiver and lower receiver).
+- Localization changes:
+	- Alamo Dallas Barrel renamed to Body Kit.
+	- Plush Phoenix Upper Body renamed to Upper Receiver.
+	- Plush Phoenix Lower Body renamed to Lower Receiver.
+	- Reworked localization for suppressed legendary attachment mods.
+- Cleanup:
+	- Refactor to use shared utilities.
+
 ## v1.5
 
 *2021-04-21 - Update 205*

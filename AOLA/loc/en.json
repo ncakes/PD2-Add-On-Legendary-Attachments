@@ -1,0 +1,21 @@
+{
+	"aola_options_menu_title": "Add-On Legendary Attachments",
+	"aola_options_menu_desc": "Add-On Legendary Attachments mod options.",
+	"aola_hide_unowned_title": "Hide Unowned Legendary Attachments",
+	"aola_hide_unowned_desc": "Hide add-on legendary attachments for skins you do not own.",
+	"aola_legacy_crosskill_fix_title": "Legacy Santa's Slayer ADS Viewmodel",
+	"aola_legacy_crosskill_fix_desc": "Use the original AOLA aiming stance for the single Crosskill with the Santa's Slayers Laser.",
+	"bm_req_legend_owned_template": "Requires ownership of the $skin skin.",
+	"bm_legend_part_name_template_barrel": "$skin Barrel",
+	"bm_legend_part_name_template_barrel_sup": "$skin Suppressed Barrel",
+	"bm_legend_part_name_template_stock": "$skin Stock",
+	"bm_legend_part_name_template_grip": "$skin Grip",
+	"bm_legend_part_name_template_foregrip": "$skin Foregrip",
+	"bm_legend_part_name_template_receiver": "$skin Receiver",
+	"bm_legend_part_name_template_receiver_upper": "$skin Upper Receiver",
+	"bm_legend_part_name_template_receiver_lower": "$skin Lower Receiver",
+	"bm_legend_part_name_template_sight_iron": "$skin Iron Sights",
+	"bm_legend_part_name_template_body_kit": "$skin Body Kit",
+	"bm_legend_part_name_template_laser": "$skin Laser",
+	"bm_legend_part_name_template_rocket": "$skin Rocket"
+}

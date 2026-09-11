@@ -1,4 +1,4 @@
 # Auto detect text files and perform LF normalization
 * text=auto
-assets/mod_overrides/*/assets/** -text
-assets/mod_overrides/*/assets/**/*.xml text
+*/assets/** -text
+*/assets/**/*.xml text
