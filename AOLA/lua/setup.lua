@@ -70,7 +70,25 @@ Hooks:Add("MenuManagerInitialize", "AOLA-Hooks-MenuManagerInitialize", function(
 	MenuCallbackHandler.aola_callback_back = function(self, item)
 		ncUtils.Settings:save(AOLA)
 		managers.blackmarket:aola_set_available_parts()
+		AOLA:set_crosskill_stance_mod()
 	end
 
 	MenuHelper:LoadFromJsonFile(AOLA.meta.menu_file, AOLA, AOLA.settings)
 end)
+
+function AOLA:set_crosskill_stance_mod(weapon_factory)
+	weapon_factory = weapon_factory or tweak_data and tweak_data.weapon and tweak_data.weapon.factory
+
+	local wfptd = weapon_factory and weapon_factory.parts
+	if wfptd and self._vanilla_stance_mod and self._legacy_stance_mod then
+		local stance_mod = self.settings.legacy_crosskill_fix and self._legacy_stance_mod or self._vanilla_stance_mod
+
+		local real_part_id = "wpn_fps_pis_1911_fl_legendary"
+		wfptd[real_part_id].stance_mod = wfptd[real_part_id].stance_mod or {}
+		wfptd[real_part_id].stance_mod.wpn_fps_pis_1911 = stance_mod
+
+		local aola_part_id = real_part_id .. AOLA.config.part_suffix
+		wfptd[aola_part_id].stance_mod = wfptd[aola_part_id].stance_mod or {}
+		wfptd[aola_part_id].stance_mod.wpn_fps_pis_1911 = stance_mod
+	end
+end

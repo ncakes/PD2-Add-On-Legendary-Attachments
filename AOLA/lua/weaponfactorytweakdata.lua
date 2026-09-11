@@ -180,17 +180,14 @@ Hooks:PostHook(WeaponFactoryTweakData, "init", "AOLA-PostHook-WeaponFactoryTweak
 
 	--Legacy ADS stance mod fix for Santa's Slayers Laser when equipped on single Crosskill
 	--Modified from stance mod of Angled Sight (wpn_fps_upg_o_45iron) for the Thanatos (wpn_fps_snp_m95)
-	if AOLA.settings.aola_legacy_crosskill_fix then
-		local stance_mod = {
+	do
+		local real_part_id = "wpn_fps_pis_1911_fl_legendary"
+		local stance_mod = self.parts[real_part_id].stance_mod and self.parts[real_part_id].stance_mod.wpn_fps_pis_1911 or {}
+		AOLA._vanilla_stance_mod = deep_clone(stance_mod)
+		AOLA._legacy_stance_mod = {
 			translation = Vector3(-0.5, 5.8, -22.5),
 			rotation = Rotation(0.5, 0, -45)
 		}
-		local real_part_id = "wpn_fps_pis_1911_fl_legendary"
-		self.parts[real_part_id].stance_mod = self.parts[real_part_id].stance_mod or {}
-		self.parts[real_part_id].stance_mod.wpn_fps_pis_1911 = deep_clone(stance_mod)
-
-		local aola_part_id = real_part_id .. AOLA.config.part_suffix
-		self.parts[aola_part_id].stance_mod = self.parts[aola_part_id].stance_mod or {}
-		self.parts[aola_part_id].stance_mod.wpn_fps_pis_1911 = deep_clone(stance_mod)
+		AOLA:set_crosskill_stance_mod(self)
 	end
 end)

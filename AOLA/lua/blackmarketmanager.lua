@@ -18,7 +18,7 @@ end)
 function BlackMarketManager:aola_set_available_parts()
 	for skin_id, data in pairs(AOLA.legend_data) do
 		local has_skin = self:have_inventory_tradable_item("weapon_skins", skin_id) or AOLA.settings.aola_debug
-		local show = has_skin or not AOLA.settings.aola_hide_unowned
+		local show = has_skin or not AOLA.settings.hide_unowned
 		for real_part_id, _ in pairs(data.parts) do
 			local aola_part_id = real_part_id .. AOLA.config.part_suffix
 			local global_value = "normal"

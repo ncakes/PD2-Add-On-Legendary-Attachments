@@ -1,5 +1,12 @@
 # Changelog
 
+## v2.0.1
+
+*2026-09-12 - Update 247.3*
+
+- Fixed a mistake that caused settings not to be applied.
+- Toggling the Santa's Slayers legacy viewmodel setting will take effect immediately.
+
 ## v2.0
 
 *2026-09-11 - Update 247.3*
