@@ -1,3 +1,7 @@
+_G[ModPath] = _G[ModPath] or {}
+if _G[ModPath][RequiredScript] then return end
+_G[ModPath][RequiredScript] = true
+
 --Refresh parts after Steam inventory update.
 Hooks:PostHook(BlackMarketManager, "tradable_update", "AOLA-PostHook-BlackMarketManager:tradable_update", function(self, ...)
 	self:aola_set_available_parts()
@@ -16,21 +20,31 @@ end)
 
 --Checks which skins are owned and set available legendary parts
 function BlackMarketManager:aola_set_available_parts()
+	local global_value = "normal"
+	local category = "weapon_mods"
+	local function set_part_availability(part_id, available, visible)
+		self._global.inventory[global_value] = self._global.inventory[global_value] or {}
+		self._global.inventory[global_value][category] = self._global.inventory[global_value][category] or {}
+		self._global.inventory[global_value][category][part_id] = available and 1 or 0
+
+		tweak_data.weapon.factory.parts[part_id].pcs = visible and {} or nil
+		tweak_data.weapon.factory.parts[part_id].inaccessible = not visible
+		tweak_data.blackmarket.weapon_mods[part_id].pcs = visible and {} or nil
+		tweak_data.blackmarket.weapon_mods[part_id].inaccessible = not visible
+	end
+
 	for skin_id, data in pairs(AOLA.legend_data) do
 		local has_skin = self:have_inventory_tradable_item("weapon_skins", skin_id) or AOLA.settings.aola_debug
 		local show = has_skin or not AOLA.settings.hide_unowned
 		for real_part_id, _ in pairs(data.parts) do
 			local aola_part_id = real_part_id .. AOLA.config.part_suffix
-			local global_value = "normal"
-			local category = "weapon_mods"
-			self._global.inventory[global_value] = self._global.inventory[global_value] or {}
-			self._global.inventory[global_value][category] = self._global.inventory[global_value][category] or {}
-			self._global.inventory[global_value][category][aola_part_id] = has_skin and 1 or 0
+			set_part_availability(aola_part_id, has_skin, show)
 
-			tweak_data.weapon.factory.parts[aola_part_id].pcs = show and {} or nil
-			tweak_data.weapon.factory.parts[aola_part_id].inaccessible = not show
-			tweak_data.blackmarket.weapon_mods[aola_part_id].pcs = show and {} or nil
-			tweak_data.blackmarket.weapon_mods[aola_part_id].inaccessible = not show
+			local extra_parts = AOLA.extra_parts[real_part_id] or {}
+			for _, weapon_id in ipairs(extra_parts) do
+				local extra_part_id = aola_part_id .. "_" .. weapon_id
+				set_part_availability(extra_part_id, has_skin, show and AOLA.settings.extended_attachments)
+			end
 		end
 	end
 end

@@ -1,45 +1,37 @@
 # Add-On Legendary Attachments
 
-**Manual update to v2.0 required. See instructions at end.**
-
 ## Overview
 
 Adds a standalone copy of legendary attachments that can be used if you own the corresponding legendary skin. Add-on legendary attachments are synced to peers as a non-legendary vanilla game attachment and will not trigger cheater tags. You can safely use them even if you do not have the legendary skin equipped.
 
-Peers will see a vanilla game attachment. Typically, this is either a default part or a base game (non-DLC) attachment. There are a few exceptions where a DLC attachment is used, but only if it belongs to the same DLC as the weapon. A full list can be found [here](https://github.com/ncakes/PD2-Add-On-Legendary-Attachments/blob/master/Based-On%20Parts.md).
+Peers will see a vanilla game attachment. This is either a default part or a base game (non-DLC) attachment. A full list can be found [here](https://github.com/ncakes/PD2-Add-On-Legendary-Attachments/blob/master/Based-On%20Parts.md).
 
-## IMPORTANT: Client Detection Risk
+## Legendary Attachment Fixes
 
-Due to the fact that add-on legendary attachments are synced as different parts, your concealment (and thus detection risk) will be incorrectly calculated by the host if the add-on part does not have the same concealment as the synced part. This can be a problem when stealthing as a client because detection is calculated by the host. For loud, it doesn't matter because crit chance is handled locally.
+AOLA includes all of the legendary attachment fixes found in OSA. Thanks to the following people for their contributions:
 
-As of v1.3, some based-on attachments have been changed to mitigate this problem as much as possible. However, the following add-on attachments will still DECREASE your concealment and give you HIGHER detection risk when playing as a client:
+- Hoppip and Mercu for helping with the Beak Suppressor model fix.
+- AkiraDragunDaishiyu for the barrel fixes for the Astatoz, Big Kahuna, and Anarcho.
 
-- Don Pastrami Stock: other players see your concealment DECREASED by 1 point, i.e. HIGHER detection risk (bad).
-- Mars Ultor Barrel: other players see your concealment DECREASED by 4 points, i.e. HIGHER detection risk (bad).
-	- Note: when combined with the Mars Ultor Stock, your concealment is effectively only DECREASED by 1 point which cancels out most of the negative effects.
-- Santa's Slayers Laser: other players see your concealment DECREASED by 2 points, i.e. HIGHER detection risk (bad).
-- The Gimp Barrel: other players see your concealment DECREASED by 3 points, i.e. HIGHER detection risk (bad).
-	- Note: when combined with The Gimp Body Kit, the concealment effects cancel out and the host sees the correct concealment.
-- Vlad's Rodina Laser: other players see your concealment DECREASED by 1 point, i.e. HIGHER detection risk (bad).
-	- Note: when combined with the Vlad's Rodina Stock, your concealment is effectively INCREASED by 1 point which actually benefits you.
+## Client Detection Risk
 
-The following add-on attachments will still INCREASE your concealment and give you LOWER detection risk when playing as a client:
+In stealth, the host calculates client concealment independently using the parts that the host sees (the synced based-on part). If the synced part has lower concealment, the host calculates you with lower concealment (i.e. higher detection risk, harmful). Conversely, if the synced part has higher concealment, it benefits you. For loud, it doesn't matter because crit chance is handled locally.
 
-- Astatoz Stock: other players will see your concealment INCREASED by 6 points, i.e. LOWER detection risk (good).
-- Big Kahuna Stock: other players will see your concealment INCREASED by 3 points, i.e. LOWER detection risk (good).
-- Mars Ultor Stock: other players will see your concealment INCREASED by 3 points, i.e. LOWER detection risk (good).
-- Midas Touch Barrel: other players will see your concealment INCREASED by 10 points, i.e. LOWER detection risk (good).
-- Plush Phoenix Stock: other players will see your concealment INCREASED by 2 points, i.e. LOWER detection risk (good).
-- The Gimp Body Kit: other players will see your concealment INCREASED by 3 points, i.e. LOWER detection risk (good).
-- Vlad's Rodina Stock: other players will see your concealment INCREASED by 2 points, i.e. LOWER detection risk (good).
+Net concealment change seen by the host. Negative is bad, positive is good.
 
-## Don Pastrami Suppressor Glitch Fix
-
-When equipping the Beak Suppressor with the Don Pastrami Barrel in the base game, the suppressor model becomes invisible and only appears intermittently when you inspect your weapon. In AOLA v1.4, an edited Beak Suppressor model has been added and is automatically used when the Don Pastrami Barrel (real or add-on) is equipped. The edited model is visually identical to the Beak Suppressor; only the culling object was changed to prevent it from glitching. Shoutout to Hoppip and Mercu for helping me figure out how to get the model working.
+| AOLA Part | Change |
+|---|---|
+| Astatoz Stock | +6 |
+| Don Pastrami Stock | -1 |
+| Mars Ultor Barrel | -4 |
+| Midas Touch Barrel | +3 |
+| Santa's Slayers Laser | -1 |
+| Vlad's Rodina Laser | -1 |
 
 ## Known Issues
 
 The Vlad's Rodina Laser and Santa's Slayers Laser can be seen by other players. However, the integrated laser found on non-gadget legendary attachments cannot be seen by other players. Full list of attachments with lasers that do not sync:
+
 - Admiral Barrel
 - Anarcho Barrel
 - Apex Barrel

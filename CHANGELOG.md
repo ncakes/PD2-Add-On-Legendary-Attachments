@@ -1,5 +1,39 @@
 # Changelog
 
+## v2.1
+
+*2026-11-07 - Update 248.2*
+
+- Legendary attachments can now be equipped by compatible weapons in the same family. Can be disabled in settings.
+	- The Reinfeld 880 can use all Demon attachments.
+	- The Locomotive 12G can use all Big Kahuna attachments.
+	- The AMCAR, CAR-4, Para, and Akimbo Para can use all Astatoz attachments.
+	- The AK.762, Golden AK.762, Krinkov, RPK, and IZHMA 12G can use all Vlad's Rodina attachments.
+	- The Akimbo Krinkov can use all Vlad's Rodina attachments except for the stock.
+- Legendary barrel extension fixes courtesy of AkiraDragunDaishiyu:
+	- Fixed alignment of barrel extensions on the Anarcho Barrel.
+	- Fixed alignment of barrel extensions on the Astatoz Barrel.
+	- Fixed alignment of barrel extensions on the Big Kahuna Barrel.
+- Fixes copied from OSA v5.1:
+	- Added an edited model of the default Kobus 90 barrel to make it invisible when using the Alamo Dallas Body Kit.
+	- Fixed missing iron sights when equipping the Midas Touch Barrel on the Akimbo Deagle.
+	- Restored the ability to use the Iron Sight on the Don Pastrami Barrel (removed from the base game in U242).
+	- Santa's Slayers Laser no longer blocks use of sight attachments.
+	- Vlad's Rodina Grip blocks Wooden Sniper Stock.
+	- Reworked handling of some legendary attachment fixes to use overrides instead of adds/forbids tables.
+- Legendary attachments are synced as default parts whenever possible. List of affected parts:
+	- Big Kahuna Foregrip
+	- Big Kahuna Stock
+	- Mars Ultor Stock
+	- Plush Phoenix Stock
+	- Santa's Slayers Grip
+	- The Gimp Barrel
+	- The Gimp Body Kit
+	- Vlad's Rodina Foregrip
+	- Vlad's Rodina Stock
+- Cleanup:
+	- Removed some duplicated assets.
+
 ## v2.0.1
 
 *2026-09-12 - Update 247.3*

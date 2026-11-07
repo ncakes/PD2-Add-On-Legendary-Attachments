@@ -15,6 +15,14 @@
 		},
 		{
 			"type": "toggle",
+			"id": "extended_attachments",
+			"title": "aola_extended_attachments_title",
+			"description": "aola_extended_attachments_desc",
+			"callback": "aola_callback_toggle",
+			"value": "extended_attachments"
+		},
+		{
+			"type": "toggle",
 			"id": "legacy_crosskill_fix",
 			"title": "aola_legacy_crosskill_fix_title",
 			"description": "aola_legacy_crosskill_fix_desc",

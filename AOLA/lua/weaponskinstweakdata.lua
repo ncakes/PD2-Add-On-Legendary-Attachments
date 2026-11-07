@@ -1,3 +1,7 @@
+_G[ModPath] = _G[ModPath] or {}
+if _G[ModPath][RequiredScript] then return end
+_G[ModPath][RequiredScript] = true
+
 --Add-on parts use same skin pattern as the real part.
 --Just reference, don't bother cloning
 Hooks:PostHook(BlackMarketTweakData, "_init_weapon_skins", "AOLA-PostHook-BlackMarketTweakData:_init_weapon_skins", function(self)
@@ -7,6 +11,12 @@ Hooks:PostHook(BlackMarketTweakData, "_init_weapon_skins", "AOLA-PostHook-BlackM
 			for real_part_id, _ in pairs(data.parts) do
 				local aola_part_id = real_part_id .. AOLA.config.part_suffix
 				skin_part_data[aola_part_id] = skin_part_data[real_part_id]
+
+				local extra_parts = AOLA.extra_parts[real_part_id] or {}
+				for _, weapon_id in ipairs(extra_parts) do
+					local extra_part_id = aola_part_id .. "_" .. weapon_id
+					skin_part_data[extra_part_id] = skin_part_data[aola_part_id]
+				end
 			end
 		end
 	end
