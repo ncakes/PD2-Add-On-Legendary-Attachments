@@ -2,11 +2,10 @@ _G[ModPath] = _G[ModPath] or {}
 if _G[ModPath][RequiredScript] then return end
 _G[ModPath][RequiredScript] = true
 
---Clone properties from real legendary part
---Clean unwanted properties from based_on part
 Hooks:PostHook(WeaponFactoryTweakData, "init", "AOLA-PostHook-WeaponFactoryTweakData:init", function(self)
 	--Copy data from legendary part to add-on part
 	local ignore_keys = {
+		"custom",--BeardLib
 		"based_on",--BeardLib synced part
 		"type",--Set in BeardLib
 		"name_id",--Automatically set in BeardLib, we will overwrite it
@@ -19,82 +18,68 @@ Hooks:PostHook(WeaponFactoryTweakData, "init", "AOLA-PostHook-WeaponFactoryTweak
 		"desc_id",--Set by OSA, will overwrite
 		AOLA.config.part_tag,
 	}
+
+	--Clone properties from real legendary part
+	--Clean unwanted properties from based_on part
+	local function copy_part_data(src_part_id, dst_part_id, based_on)
+		local src_part_data = self.parts[src_part_id]
+		local dst_part_data = self.parts[dst_part_id]
+		local bsd_part_data = self.parts[based_on]
+
+		--Remove inherited properties from "based_on" that aren't present in the source part
+		--e.g. prevents Raven's front sight from being moved, might fix some other things
+		for k, _ in pairs(dst_part_data) do
+			if not table.contains(ignore_keys, k) then
+				if src_part_data[k] == nil and bsd_part_data[k] ~= nil then
+					dst_part_data[k] = nil
+				end
+			end
+		end
+
+		for k, v in pairs(src_part_data) do
+			if not table.contains(ignore_keys, k) then
+				if type(v) == "table" then
+					dst_part_data[k] = deep_clone(v)
+				else
+					dst_part_data[k] = v
+				end
+			end
+		end
+	end
+
 	for skin_id, data in pairs(AOLA.legend_data) do
 		for real_part_id, _ in pairs(data.parts) do
 			local aola_part_id = real_part_id .. AOLA.config.part_suffix
 			local aola_part_data = self.parts[aola_part_id]
-			local real_part_data = self.parts[real_part_id]
-			local based_on_data = self.parts[aola_part_data.based_on]
-
-			--Remove stuff that was copied from "based_on" part but isn't in the legendary attachment
-			--e.g. prevents Raven's front sight from being moved, might fix some other things
-			for k, v in pairs(aola_part_data) do
-				if not table.contains(ignore_keys, k) then
-					--Key is absent in real part but present in based_on part
-					if real_part_data[k] == nil and based_on_data[k] ~= nil then
-						aola_part_data[k] = nil
-					end
-				end
-			end
-
-			--Copy properties from real legendary attachment
-			--Also copies the Beak Suppressor fix and legend_part_name_type
-			for k, v in pairs(real_part_data) do
-				if not table.contains(ignore_keys, k) then
-					if tostring(type(v)) == "table" then
-						aola_part_data[k] = deep_clone(v)
-					else
-						aola_part_data[k] = v
-					end
-				end
-			end
+			copy_part_data(real_part_id, aola_part_id, aola_part_data.based_on)
 
 			--AOLA tracking
 			aola_part_data[AOLA.config.part_tag] = true
-
 			--Use original name_id with "_addon" appended.
 			--Note: some legendary name_ids are incorrect and need to be fixed before this.
 			aola_part_data.name_id = self.parts[real_part_id].name_id .. AOLA.config.part_suffix
-
 			--Add description
 			aola_part_data.has_description = true
 			aola_part_data.desc_id = "bm_req_legend_owned_" .. skin_id
-
 			--Just in case
 			aola_part_data.dlc = nil
 			aola_part_data.unatainable = nil
 		end
 	end
 
-	--Copy AOLA data to extra part.
+	--Process extended legendary attachments.
 	for real_part_id, extra_parts in pairs(AOLA.extra_parts) do
 		local aola_part_id = real_part_id .. AOLA.config.part_suffix
 		for _, weapon_id in ipairs(extra_parts) do
 			local extra_part_id = aola_part_id .. "_" .. weapon_id
 			local extra_part_data = self.parts[extra_part_id]
-			local aola_part_data = self.parts[aola_part_id]
-			local based_on_data = self.parts[extra_part_data.based_on]
-			for k, v in pairs(extra_part_data) do
-				if not table.contains(ignore_keys, k) then
-					if aola_part_data[k] == nil and based_on_data[k] ~= nil then
-						extra_part_data[k] = nil
-					end
-				end
-			end
-			for k, v in pairs(aola_part_data) do
-				if not table.contains(ignore_keys, k) then
-					if tostring(type(v)) == "table" then
-						extra_part_data[k] = deep_clone(v)
-					else
-						extra_part_data[k] = v
-					end
-				end
-			end
+			copy_part_data(real_part_id, extra_part_id, extra_part_data.based_on)
+
 			--Important: set part_tag to false to prevent autoswap by OSA.
 			extra_part_data[AOLA.config.part_tag] = false
-			extra_part_data.name_id = aola_part_data.name_id
+			extra_part_data.name_id = self.parts[aola_part_id].name_id
 			extra_part_data.has_description = true
-			extra_part_data.desc_id = aola_part_data.desc_id
+			extra_part_data.desc_id = self.parts[aola_part_id].desc_id
 			extra_part_data.dlc = nil
 			extra_part_data.unatainable = nil
 		end
@@ -139,6 +124,18 @@ Hooks:PostHook(WeaponFactoryTweakData, "init", "AOLA-PostHook-WeaponFactoryTweak
 		}
 		AOLA:set_crosskill_stance_mod(self)
 	end
+
+	--Adjust ADS stance for extended Astatoz Foregrip.
+	local function set_stance_translation(part_id, weapon_id, y)
+		local part = self.parts[part_id]
+		part.stance_mod = part.stance_mod or {}
+		part.stance_mod[weapon_id] = {
+			translation = Vector3(0, y, 0),
+		}
+	end
+	set_stance_translation("wpn_fps_ass_m16_fg_legend_addon_olympic", "wpn_fps_smg_olympic", 10)
+	set_stance_translation("wpn_fps_ass_m16_fg_legend_addon_amcar", "wpn_fps_ass_amcar", 10)
+	set_stance_translation("wpn_fps_ass_m16_fg_legend_addon_new_m4", "wpn_fps_ass_m4", 14)
 end)
 
 if _G.OSA then
@@ -147,7 +144,7 @@ end
 
 --Fallback for OSA's legendary attachment fixes.
 --Copy directly, do not modify.
---Current version from OSA v5.1.
+--Current version from OSA v5.1.1.
 local OSA = {}
 OSA.legend_data = AOLA.legend_data
 
@@ -272,8 +269,7 @@ Hooks:PreHook(WeaponFactoryTweakData, "_set_inaccessibles", "OSA-PreHook-WeaponF
 			--Alamo Dallas "hide" default barrel.
 			--Can't use standard dummy because it messes up the barrel extensions.
 			local unit = "units/aola/weapons/wpn_fps_smg_p90_pts/wpn_fps_smg_p90_b_short_dallas"
-			override_unit("wpn_fps_smg_p90_b_legend", "wpn_fps_smg_p90_b_short", unit
-			)
+			override_unit("wpn_fps_smg_p90_b_legend", "wpn_fps_smg_p90_b_short", unit)
 		end
 		do
 			--Don Pastrami suppressor fix

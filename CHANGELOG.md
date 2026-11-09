@@ -1,5 +1,12 @@
 # Changelog
 
+## v2.1.1
+
+*2026-11-09 - Update 248.2*
+
+- Adjusted viewmodel when using the Astatoz Foregrip on the AMCAR, CAR-4, and Para.
+- Added a button to download Legendary Stat Customizer from the AOLA options menu.
+
 ## v2.1
 
 *2026-11-07 - Update 248.2*

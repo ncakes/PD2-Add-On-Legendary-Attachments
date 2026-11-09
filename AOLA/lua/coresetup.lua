@@ -74,12 +74,67 @@ Hooks:Add("MenuManagerInitialize", "AOLA-Hooks-MenuManagerInitialize", function(
 		AOLA:set_crosskill_stance_mod()
 	end
 
+	Hooks:Add("MenuManagerBuildCustomMenus", "AOLA-Hooks-MenuManagerBuildCustomMenus", function(menu_manager, nodes)
+		if menu_manager._is_start_menu then
+			AOLA:register_dl_button()
+		end
+	end)
+
 	MenuHelper:LoadFromJsonFile(
 		AOLA.meta.mod_path .. "menu/options.json",
 		AOLA,
 		AOLA.settings
 	)
 end)
+
+function AOLA:register_dl_button()
+	local mod_folder = "Legendary Stat Customizer"
+	if _G.LegendStats ~= nil or ncUtils.FileIO:path_exists("mods/" .. mod_folder) then
+		return
+	end
+
+	MenuHelper:AddDivider({
+		id = "download_buttons_divider",
+		size = 16,
+		menu_id = "aola_options_menu",
+		priority = -1,
+	})
+
+	MenuHelper:AddButton({
+		id = "dl_lsc_button",
+		title = "aola_dl_lsc_button_title",
+		desc = "aola_dl_lsc_button_desc",
+		callback = "aola_callback_button",
+		menu_id = "aola_options_menu",
+		priority = -2,
+		disabled = false,
+	})
+end
+
+function AOLA:dl_lsc_button_callback()
+	local menu_title = managers.localization:text("aola_dialog_title")
+	local menu_message = managers.localization:text("aola_dialog_install_lsc")
+	local menu_options = {
+		{
+			text = managers.localization:text("aola_dialog_add_to_download_manager"),
+			callback = function()
+				local mod_folder = "Legendary Stat Customizer"
+				local manifest_path = self.meta.mod_path .. "data/LSC.txt"
+				local done_cb = function()
+					managers.menu:open_node("blt_download_manager")
+				end
+				ncUtils.Bootstrap:blt_mod(mod_folder, manifest_path, done_cb)
+				ncUtils.Menu:disable_item("dl_lsc_button", self)
+			end,
+		},
+		{
+			text = managers.localization:text("dialog_cancel"),
+			is_focused_button = true,
+			is_cancel_button = true,
+		}
+	}
+	QuickMenu:new(menu_title, menu_message, menu_options):show()
+end
 
 function AOLA:set_crosskill_stance_mod(weapon_factory)
 	weapon_factory = weapon_factory or tweak_data and tweak_data.weapon and tweak_data.weapon.factory
